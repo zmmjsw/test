@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.eshipping.fba.dao.CityDao">
+
+	<select id="findAll" resultType="hashmap">
+		select * from city
+	</select>
+	
+	
+	<insert id="addEntireCabinet"  parameterType="java.util.List">
+		insert into
+		pdf(
+		routing_code,
+		service_centre,
+		tour_id,
+		unique_ref,
+		jbo_number,
+		servicecode
+		)values
+		<foreach collection="list"  item="list"  index="index" separator=",">
+		(
+		#{list.RoutingCode},
+		#{list.ServiceCentre},
+		#{list.TourId},
+		#{list.UniqueRef},
+		#{list.jboNumber},
+		#{list.servicecode}
+		)
+		</foreach>
+		
+	</insert> 
+
+</mapper>
