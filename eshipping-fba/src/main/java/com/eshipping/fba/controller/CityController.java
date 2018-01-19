@@ -12,12 +12,15 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.eshipping.fba.dao.CityMongoDao;
+import com.eshipping.fba.entity.City;
 import com.eshipping.fba.entity.Pdf;
 import com.eshipping.fba.service.CityService;
 import com.eshipping.fba.service.SysPermissionService;
@@ -43,10 +46,32 @@ public class CityController {
     
 	@Autowired
 	private SysPermissionService sysPermissionService;
+	
+	
+
     
-    @RequestMapping(value = "/api/findAll", method = RequestMethod.POST)
-    public String findAll() {
-    	cityService.addEntirePdf();
+    @RequestMapping(value = "/api/addCity", method = RequestMethod.POST)
+    public String addCity(@RequestBody City city) {
+	        cityService.addCity(city);
+        return cityService.findAll().toString();
+    }
+    
+   
+    
+    @RequestMapping(value = "/api/findCity", method = RequestMethod.POST)
+    public City findCity(@RequestParam(value = "name")String name) {
+        return 	cityService.findUserByUserName(name);
+    }
+    
+    @RequestMapping(value = "/api/updateCity", method = RequestMethod.POST)
+    public String updateCity(@RequestBody City city) {
+	        cityService.updateUserById(city);
+        return cityService.findAll().toString();
+    }
+    
+    @RequestMapping(value = "/api/deleteCity", method = RequestMethod.POST)
+    public String deleteCity(@RequestParam(value = "id")Long id) {
+	        cityService.deleteUserById(id);
         return cityService.findAll().toString();
     }
     

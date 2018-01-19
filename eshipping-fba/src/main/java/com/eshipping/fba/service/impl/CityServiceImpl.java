@@ -13,11 +13,18 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.eshipping.fba.dao.CityDao;
+import com.eshipping.fba.dao.CityMongoDao;
+import com.eshipping.fba.entity.City;
 import com.eshipping.fba.service.CityService;
 
 
@@ -32,9 +39,15 @@ import com.eshipping.fba.service.CityService;
  */
 @Service
 public class CityServiceImpl implements CityService {
+	
+	 
+
 
     @Autowired
     private CityDao cityDao;
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
 
 	@Override
 	public List<Map<Object, Object>> findAll() {
@@ -88,6 +101,66 @@ public class CityServiceImpl implements CityService {
 		}
 		return list1;
 	}
+	
+	
+	
+
+
+	@Override
+	public void addCity(City city) {
+		mongoTemplate.save(city);
+		
+	}
+	
+	/*@Override
+	public City findCityByName(String name) {
+		 Query query=new Query(Criteria.where("userName").is(name));
+		 City user =  mongoTemplate.findOne(query , City.class);
+		return user;
+	}
+
+	@Override
+	public void updateCity(City city) {
+		  Query query=new Query(Criteria.where("id").is(city.getId()));
+	        Update update= new Update().set("userName", city.getCityName()).set("description", city.getDescription());
+	        //更新查询返回结果集的第一条
+	        mongoTemplate.updateFirst(query,update,City.class);
+	        //更新查询返回结果集的所有
+	        // mongoTemplate.updateMulti(query,update,UserEntity.class);
+		
+	}
+
+	@Override
+	public void removeCityById(Long id) {
+		 Query query=new Query(Criteria.where("id").is(id));
+	        mongoTemplate.remove(query,City.class);
+	}*/
+
+	@Override
+	public City findUserByUserName(String name) {
+		Query query=new Query(Criteria.where("cityName").is(name));
+		 City user =  mongoTemplate.findOne(query , City.class);
+		 return user;
+	}
+
+	@Override
+	public void updateUserById(City city) {
+		  Query query=new Query(Criteria.where("id").is(city.getId()));
+	        Update update= new Update().set("cityName", city.getCityName()).set("description", city.getDescription());
+	        //更新查询返回结果集的第一条
+	        mongoTemplate.updateFirst(query,update,City.class);
+	        //更新查询返回结果集的所有
+	        // mongoTemplate.updateMulti(query,update,UserEntity.class);
+		
+	}
+
+	@Override
+	public void deleteUserById(Long id) {
+		 Query query=new Query(Criteria.where("id").is(id));
+	        mongoTemplate.remove(query,City.class);
+		
+	}
+	
 	
 
 

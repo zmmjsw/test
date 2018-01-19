@@ -3,6 +3,8 @@ package com.eshipping.fba.service;
 import java.util.List;
 import java.util.Map;
 
+import com.eshipping.fba.entity.City;
+
 
 /**
  * 
@@ -23,5 +25,15 @@ public interface CityService {
     List<Map<Object,Object>> findAll();
     
     void addEntirePdf();
+    
+    void addCity(City city);
+    
+    City findUserByUserName(String name);
+    
+    void updateUserById(City city);
+    
+    void deleteUserById(Long id);
+    
+   
 
 }

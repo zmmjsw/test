@@ -1,5 +1,7 @@
 package com.eshipping.fba.entity;
 
+import java.io.Serializable;
+
 /**
  * 
 * @ClassName: City 
@@ -8,9 +10,13 @@ package com.eshipping.fba.entity;
 * @date 2017年12月7日 下午6:01:11 
 *
  */
-public class City {
+public class City implements Serializable{
 
-    private Long id;
+    /** 
+	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么) 
+	*/ 
+	private static final long serialVersionUID = 1L;
+	private Long id;
     private Long provinceId;
     private String cityName;
     private String description;
