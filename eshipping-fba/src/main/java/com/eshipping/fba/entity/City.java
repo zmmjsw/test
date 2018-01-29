@@ -2,6 +2,9 @@ package com.eshipping.fba.entity;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 /**
  * 
 * @ClassName: City 
@@ -18,6 +21,8 @@ public class City implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Long id;
     private Long provinceId;
+    @NotNull(message = "名称不能为空")
+    @Size(min=2, max=30, message = "名字长度必须在2和30之间")
     private String cityName;
     private String description;
 
