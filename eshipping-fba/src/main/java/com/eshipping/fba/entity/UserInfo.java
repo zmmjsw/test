@@ -109,8 +109,16 @@ public class UserInfo implements Serializable {
     public void setRoleList(List<SysRole> roleList) {
         this.roleList = roleList;
     }
+    
+    
 
-    /**
+    @Override
+	public String toString() {
+		return "UserInfo [uid=" + uid + ", userName=" + userName + ", name=" + name + ", passWord=" + passWord
+				+ ", salt=" + salt + ", state=" + state + ", roleList=" + roleList + "]";
+	}
+
+	/**
      * 密码盐.
      * @return
      */

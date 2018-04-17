@@ -6,7 +6,9 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.eshipping.fba.entity.FreightCalculation;
 import com.eshipping.fba.entity.SysRole;
+import com.eshipping.fba.entity.TaxRate;
 import com.eshipping.fba.entity.UserInfo;
 
 /**
@@ -27,5 +29,10 @@ public interface CityDao {
 	List<Map<Object, Object>> findAll();
 
 	void addEntireCabinet(List<Map<String, Object>> list);
+	
+	void addFreight(List<FreightCalculation> list);
+
+	void addTaxRate(List<TaxRate> excelToList);
+
 
 }

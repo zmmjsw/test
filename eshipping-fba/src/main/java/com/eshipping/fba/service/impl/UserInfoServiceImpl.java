@@ -41,6 +41,7 @@ public class UserInfoServiceImpl implements UserInfoService {
     
 	@Override
 	public UserInfo findByUserName(String userName) {
+		List<UserInfo> findByPassWord = userInfoDao.findByPassWord("3ef7164d1f6167cb9f2658c07d3c2f0a");
 		   return userInfoDao.findByUserName(userName);
 	}
 	

@@ -2,9 +2,13 @@ package com.eshipping.fba.controller;
 
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -21,7 +25,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.eshipping.fba.dao.CityMongoDao;
 import com.eshipping.fba.entity.City;
+import com.eshipping.fba.entity.FreightCalculation;
 import com.eshipping.fba.entity.Pdf;
+import com.eshipping.fba.entity.TaxRate;
+import com.eshipping.fba.entity.Testq;
 import com.eshipping.fba.service.CityService;
 import com.eshipping.fba.service.SysPermissionService;
 import com.eshipping.fba.util.ExcelUtil;
@@ -90,10 +97,12 @@ public class CityController {
     }
     
     @RequestMapping(value = "/api/input", method = RequestMethod.POST)
-    public String input(@RequestParam(value="filename") MultipartFile file,  
+ public String input(@RequestParam(value="filename") MultipartFile file,  
             HttpServletRequest request,HttpServletResponse response) throws Exception {
+ 
+    	System.out.println("heh");
     	 //判断文件是否为空  
-        if(file==null){  
+     /*   if(file==null){  
          return "文件不能为空！";  
         }  
         //获取文件名  
@@ -104,22 +113,24 @@ public class CityController {
         }  
         InputStream inputStream = file.getInputStream();
         LinkedHashMap<String, String> fieldMap=new LinkedHashMap<String, String>();
-        fieldMap.put("Unique Ref", "orderId");
-        fieldMap.put("Job Number", "state");
-        fieldMap.put("Reference", "handlePoint");
-        fieldMap.put("Tariff", "targetWarehouse");
-        fieldMap.put("Delivery Postcode/Zipcode", "productService");
-        fieldMap.put("xx", "xx");
-        fieldMap.put("yy", "yy");
-        fieldMap.put("zz", "zz");
-        fieldMap.put("hh", "hh");
+        fieldMap.put("HS编码", "hsCode");
+        fieldMap.put("8位商品编码", "eightProductCode");
+        fieldMap.put("商品编码附加码", "productAdditionalCode");
+        fieldMap.put("名称", "categoryName");
+        fieldMap.put("低税率", "minTax");
+        fieldMap.put("高税率", "maxTax");
+        fieldMap.put("消费税率", "exciseTax");
+        fieldMap.put("增值税率", "incrementTax");
+        fieldMap.put("备注", "remarks");
         String are[]= {"FBA CODE"};
-        List<Pdf> excelToList = ExcelUtil.excelToList(inputStream, "Sheet1", Pdf.class, fieldMap, are);
-        System.out.println(excelToList.toString());
+        List<TaxRate> excelToList = ExcelUtil.excelToList(inputStream, "税率", TaxRate.class, fieldMap, are);
+     //   cityService.addFright(excelToList);
+        cityService.addTaxRate(excelToList);
+        System.out.println(excelToList.toString());*/
         return cityService.findAll().toString();
     }
-    
-    
+	
+	
     
     
    

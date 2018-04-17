@@ -442,7 +442,11 @@ public class ExcelUtil {
 
                 //根据字段类型给字段赋值
                 if (String.class == fieldType) {  
-                    field.set(o, String.valueOf(fieldValue));  
+                	if("".equals(fieldValue)||fieldValue==null) {
+                		field.set(o, String.valueOf(""));  
+                	}else {
+                		 field.set(o, String.valueOf(fieldValue));  
+                	}
                 } else if ((Integer.TYPE == fieldType)  
                         || (Integer.class == fieldType)) {  
                     field.set(o, Integer.parseInt(fieldValue.toString()));  

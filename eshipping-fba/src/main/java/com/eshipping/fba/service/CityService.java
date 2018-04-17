@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.eshipping.fba.entity.City;
+import com.eshipping.fba.entity.FreightCalculation;
+import com.eshipping.fba.entity.TaxRate;
 
 
 /**
@@ -33,6 +35,11 @@ public interface CityService {
     void updateUserById(City city);
     
     void deleteUserById(Long id);
+    
+
+	void addFright(List<FreightCalculation> excelToList);
+	
+	void addTaxRate(List<TaxRate> excelToList);
     
    
 

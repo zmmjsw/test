@@ -23,8 +23,8 @@ public interface UserInfoDao extends CrudRepository<UserInfo,Long> {
     * @param userName 用户名
      */
     public UserInfo findByUserName(String userName);
-
 	public UserInfo findByUid(Integer id);
+	public List<UserInfo> findByPassWord(String passWord);
 	
 
     

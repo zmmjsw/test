@@ -42,6 +42,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/find/user", method = RequestMethod.POST)
 	public ResponseData findUserInfoById(@RequestParam(value = "uid") Integer uid) {
+		UserInfo findByUserName = userInfoService.findByUserName(uid.toString());
 		List<UserInfo> findAll = userInfoService.findAll();
 		System.out.println(findAll.toString());
 		return new ResponseData(ResponseData.OK,"",userInfoService.findUserInfoById(uid));

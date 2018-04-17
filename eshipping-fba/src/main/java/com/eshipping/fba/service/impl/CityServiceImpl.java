@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 
 import com.eshipping.fba.dao.CityDao;
 import com.eshipping.fba.entity.City;
+import com.eshipping.fba.entity.FreightCalculation;
+import com.eshipping.fba.entity.TaxRate;
 import com.eshipping.fba.service.CityService;
 
 
@@ -155,6 +157,18 @@ public class CityServiceImpl implements CityService {
 	public void deleteUserById(Long id) {
 		 Query query=new Query(Criteria.where("id").is(id));
 	        mongoTemplate.remove(query,City.class);
+		
+	}
+
+	@Override
+	public void addFright(List<FreightCalculation> list) {
+		cityDao.addFreight(list);
+		
+	}
+
+	@Override
+	public void addTaxRate(List<TaxRate> excelToList) {
+		cityDao.addTaxRate(excelToList);
 		
 	}
 	

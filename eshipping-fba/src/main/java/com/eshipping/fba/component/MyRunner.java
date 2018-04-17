@@ -59,7 +59,6 @@ public class MyRunner implements CommandLineRunner {
 		Integer num = sysPermissionService.saveSysPermission(spList);
 		//如果已经添加过就不要添加
 		if (0 != num) {
-
 			// 添加角色
 			System.out.println("初始化加载角色");
 			// 管理
@@ -76,7 +75,6 @@ public class MyRunner implements CommandLineRunner {
 			ru.setRole("user");
 			sysPermissionService.saveSysRole(ru);
 			sysPermissionService.saveSysRolePermission(ru.getId(), 2);
-
 			// 添加用户
 			System.out.println("初始添加用户");
 			UserDto ud = new UserDto();
